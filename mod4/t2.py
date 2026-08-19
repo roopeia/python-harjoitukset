@@ -1,0 +1,17 @@
+#Kirjoita ohjelma, joka kysyy käyttäjältä laivan hyttiluokan (LUX, A, B, C) ja tulostaa sen sanallisen kuvauksen alla olevan luettelon mukaisesti. 
+# Tehtävässä on käytettävä if/elif/else-toistorakennetta.
+#LUX on parvekkeellinen hytti yläkannella.
+#A on ikkunallinen hytti autokannen yläpuolella.
+#B on ikkunaton hytti autokannen yläpuolella.
+#C on ikkunaton hytti autokannen alapuolella.
+
+hyttiluokka = input("mikä hyttiluokka? (LUX, A, B, C) ")
+
+if hyttiluokka == "LUX":
+    print("LUX on parvekkeellinen hytti yläkannella.")
+elif hyttiluokka == "A":
+    print("A on ikkunallinen hytti autokannen yläpuolella.")
+elif hyttiluokka == "B":
+    print("B on ikkunaton hytti autokannen yläpuolella.")
+else:
+    print("C on ikkunaton hytti autokannen alapuolella.")
