@@ -4,8 +4,7 @@
 # Edellisessä tapauksessa tulostetaan Tervetuloa ja jälkimmäisessä Pääsy evätty. 
 # (Oikea käyttäjätunnus on python ja salasana rules).
 
-user = input("Käyttäjä:")
-pword = input("Salasana:")
+
 kerrat = 1
 
 realuser = "user"
