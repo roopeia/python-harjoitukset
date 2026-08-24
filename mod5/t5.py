@@ -7,8 +7,8 @@
 
 kerrat = 1
 
-realuser = "user"
-realpword = "pword"
+realuser = "python"
+realpword = "rules"
 
 while kerrat != 5:
     user = input("Käyttäjä:")
