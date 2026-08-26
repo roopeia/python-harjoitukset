@@ -20,7 +20,7 @@ a = 0
 for i in range(No):
     x = random.uniform(-1, 1)
     y = random.uniform(-1, 1)
-    if (x * x) + (y * y) < 1:
+    if (x * x) + (y * y) <= 1:
         a = a + 1
 
 pii = 4 * a / No
