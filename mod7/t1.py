@@ -10,7 +10,7 @@ def noppa(luku):
 num = 0
 
 while True:
-    heitto = input("Heitä noppaa ")
+    heitto = input("Heitä noppaa (Enter) ")
     if heitto: True
     num = noppa(num)
     print(num)
