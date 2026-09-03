@@ -19,6 +19,3 @@ while komento != "lopeta":
         print(nimi)
     elif komento == "ls_profiili":
         print(ika, nimi)
-    elif komento == "lopeta":
-        quit()
-    
