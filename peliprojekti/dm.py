@@ -42,7 +42,7 @@ def profiili(x, y):
 
 
 while komento != "lopeta":
-    func = input("minkä toiminnon haluat suorittaa: ls, ls_add, profiili: ")
+    func = input("minkä toiminnon haluat suorittaa: ls, ls_add, profiili, lopeta: ")
     if func == "ls":
         ls(lista)
     elif func == "ls_add":
