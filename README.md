@@ -2,25 +2,23 @@
 
 Roope Aaltonen
 ## Moduuli 1
+tehty
 
-Tein
 ## Moduuli 2
-
-Tein
-
+tehty
 
 ## Moduuli 3
-tein tehtävät 1 - 6
+tehty
 
 ## Moduuli 4
-tein tehtävät 1- 4
+tehty
 
 ## Moduuli 5
-tein 1-5
+tehty
 
 ## Moduuli 6
 tehty
 
 ## Moduuli 7
-tehtävät 1, 2 tehty
+tehty.
 ...
