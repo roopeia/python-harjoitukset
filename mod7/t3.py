@@ -2,3 +2,14 @@
 # Kirjoita pääohjelma, joka kysyy gallonamäärän käyttäjältä ja muuntaa sen litroiksi. Muunnos on tehtävä aliohjelmaa hyödyntäen. 
 # Muuntamista jatketaan siihen saakka, kunnes käyttäjä syöttää negatiivisen gallonamäärän. Yksi gallona on 3,785 litraa.
 
+
+def muuntaja(luku):
+    luku = luku * 3.785
+    print(luku)
+    return
+
+G = 1
+
+while G > 0:
+    G = int(input("anna galloona määrä "))
+    muuntaja(G)

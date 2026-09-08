@@ -1,3 +1,7 @@
+
+lista = []
+komento = ""
+
 nimi = input("mikä on nimesi?")
 ika = int(input("kuinka vanha olet?"))
 
@@ -9,13 +13,39 @@ if ika <= 12:
 else:
     print("hei", nimi)
 
-komento = ""
+def ls_add():
+    x = input("Listaa asia: ")
+    lista.append(x)
+    print("asia listattu")
+    return
+
+def ls(obj):
+    if not obj:
+        print("Lista on tyhjä")
+    for i in obj:
+        print(i)
+    return
+
+def profiili(x, y):
+    komento = ""
+    nimi = x
+    ika = y
+    while komento != "takaisin":
+        print("")
+        print("PROFIILI")
+        print(nimi, ika)
+        komento = input("Anna komento: muokkaa, takaisin: ")
+        if komento == "muokkaa":
+            nimi = input("aseta nimi: ")
+            ika = int(input("aseta ikä: "))
+    return nimi, ika
+
 
 while komento != "lopeta":
-    komento = input("Anna komento: ls_ika, ls_nimi, ls_profiili, lopeta ")
-    if komento == "ls_ika":
-        print(ika)
-    elif komento == "ls_nimi":
-        print(nimi)
-    elif komento == "ls_profiili":
-        print(ika, nimi)
+    func = input("minkä toiminnon haluat suorittaa: ls, ls_add, profiili: ")
+    if func == "ls":
+        ls(lista)
+    elif func == "ls_add":
+        ls_add()
+    elif func == "profiili":
+        nimi, ika = profiili(nimi, ika)
