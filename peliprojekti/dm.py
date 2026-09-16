@@ -38,6 +38,8 @@ def profiili(x, y):
         if komento == "muokkaa":
             nimi = input("aseta nimi: ")
             ika = int(input("aseta ikä: "))
+            if ika <= 12:
+                quit()
     return nimi, ika
 
 
