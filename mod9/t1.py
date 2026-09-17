@@ -34,7 +34,7 @@ for i in range(1, 11):
 
 
 while max(auto.matka for auto in autot) < 10000:
-    ls = []
+    
     for auto in autot:
         x = random.randint(-10, 15)
         auto.kiihdyta(x)
@@ -43,10 +43,6 @@ while max(auto.matka for auto in autot) < 10000:
 
     for auto in autot:
         auto.kulje(1)
-
-    for auto in autot:
-        ls.append(auto.matka)
-
 
 print(f"{'Rek':<10}{'Huippu':<10}{'Matka':<10}")
 
