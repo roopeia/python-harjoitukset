@@ -1,9 +1,3 @@
-#Kirjoita Auto-luokka, jonka ominaisuuksina ovat rekisteritunnus, huippunopeus, 
-# tämänhetkinen nopeus ja kuljettu matka. Kirjoita luokkaan alustaja, 
-# joka asettaa ominaisuuksista kaksi ensin mainittua parametreina saatuihin arvoihin.
-#  Uuden auton nopeus ja kuljetut matka on asetettava automaattisesti nollaksi. 
-# Kirjoita pääohjelma, jossa luot uuden auton (rekisteritunnus ABC-123, 
-# huippunopeus 142 km/h). Tulosta pääohjelmassa sen jälkeen luodun auton kaikki ominaisuudet.
 
 import random
 
@@ -16,11 +10,11 @@ class Auto:
         self.matka = 0
 
     def kiihdyta(self, kmh):
-        if kmh + self.vauhti <= self.hn and kmh >= 0:
-            self.vauhti += kmh
+        if kmh + self.vauhti <= self.hn and kmh + self.vauhti >= 0:
+            self.vauhti = self.vauhti + kmh
         elif self.vauhti + kmh >= self.hn:
             self.vauhti = self.hn
-        return 
+        return
 
     def ebrake(self):
         self.vauhti = self.vauhti - 200
@@ -29,32 +23,32 @@ class Auto:
         return
 
     def kulje(self, aika):
-        self.matka = aika * self.vauhti
+        self.matka = self.matka + aika * self.vauhti
         return
 
-xyz = 0
-while xyz < 10000:
-    for i in range(1, 11):
-        x = random.randint(100, 200)
-        globals()[f"Auto{i}"] = Auto(f"ABC-{i}", x)
+autot = []
 
-    for i in range(1, 11):
+for i in range(1, 11):
+    x = random.randint(100, 200)
+    autot.append(Auto(f"ABC-{i}", x))
+
+
+while max(auto.matka for auto in autot) < 10000:
+    ls = []
+    for auto in autot:
         x = random.randint(-10, 15)
-
-        globals()[f"Auto{i}"].kiihdyta(x)
-
-        print(globals()[f"Auto{i}"].vauhti)
+        auto.kiihdyta(x)
 
     print("")
 
-    for i in range(1, 11):
-        globals()[f"Auto{i}"].kulje(1)
+    for auto in autot:
+        auto.kulje(1)
 
-        print(globals()[f"Auto{i}"].matka)
+    for auto in autot:
+        ls.append(auto.matka)
 
-    for i in range(1, 11):
-        ls = []
-        ls.append(globals()[f"Auto{i}"].matka)
-        if 10000 in ls:
-            xyz = 10000
-    
+
+print(f"{'Rek':<10}{'Huippu':<10}{'Matka':<10}")
+
+for auto in autot:
+    print(f"{auto.rek:<10}{auto.hn:<10}{auto.matka:<10}")
