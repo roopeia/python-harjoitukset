@@ -9,3 +9,28 @@ class Hissi:
         self.yk = yk
         self.ak = ak
         self.kerros = 0
+
+    def siirry_kerrokseen(self, x):
+        if self.kerros > x:
+            while self.kerros != x:
+                self.kerros_alas()
+        if self.kerros < x:
+            while self.kerros != x:
+                self.kerros_ylös()
+        print(self.kerros)  
+        
+
+    def kerros_ylös(self):
+        self.kerros = self.kerros + 1
+        if self.kerros >= self.yk:
+            self.kerros = self.yk
+
+    def kerros_alas(self):
+        self.kerros = self.kerros - 1
+        if self.kerros <= self.ak:
+            self.kerros = self.ak
+
+h1 = Hissi(10, 1)
+
+h1.siirry_kerrokseen(6)
+h1.siirry_kerrokseen(1)
