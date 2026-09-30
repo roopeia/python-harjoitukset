@@ -1,0 +1,116 @@
+from .Huone import Huone, Lukittu, Bosshuone
+from .Esine import Esine, Avain, Varuste
+import os
+import json
+
+class Pelaaja:
+    pelaajat = []
+    def __init__(self, nimi, huone, esineetid):
+        self.nimi = nimi
+        self.hp = 1
+        self.dmg = 0
+        self.huone = huone
+        self.esineet = []
+        #olioita ei voi tallentaa json tiedostoon joten tallennan olioon liitetyn numeron
+        self.esineetid = esineetid
+        for id in esineetid:
+            self.esineet.append(Esine.esineet[id])
+        """
+        for esine in self.esineet:
+            if hasattr(esine, "hp"):
+                self.hp += esine.hp
+            elif hasattr(esine, "dmg"):
+                self.dmg += esine.dmg
+        """
+        self.tallennus_data = {
+            "nimi": self.nimi,
+            "huone": self.huone,
+            "esineetid": self.esineetid
+        }
+        Pelaaja.pelaajat.append(self)
+
+    def liiku_eteen(self):
+
+        if self.huone >= len(Huone.huoneet) - 1:
+            print("Et voi mennä eteenpäin.")
+            print(Huone.huoneet[self.huone].nimi)
+            return
+
+        seuraava = Huone.huoneet[self.huone + 1]
+
+        if isinstance(seuraava, Bosshuone):
+            if seuraava.vaatimus in self.esineet:
+                self.huone += 1
+                print("ovi aukaistu")
+                print(Huone.huoneet[self.huone].nimi)
+                print(seuraava.vaatimus.nimi)
+                print(seuraava.npc.nimi)
+            else:
+                print("ovi lukossa")
+        elif isinstance(seuraava, Lukittu):
+            if seuraava.vaatimus in self.esineet:
+                self.huone += 1
+                print("ovi aukaistu")
+                print(Huone.huoneet[self.huone].nimi)
+            else:
+                print("ovi lukossa")
+        else:
+            self.huone += 1
+            print(Huone.huoneet[self.huone].nimi)
+        print(self.huone)
+    
+
+    def attack(self):
+        if hasattr(Huone.huoneet[self.huone], "npc"):
+            if Huone.huoneet[self.huone].npc.hp != 0:
+                Huone.huoneet[self.huone].npc.hp -= self.dmg
+                print(f"vihun hp: {Huone.huoneet[self.huone].npc.hp}")
+                print(self.hp)
+            else: 
+                print("Kuoli jo!")
+        
+
+
+    def liiku_taakse(self):
+
+        if self.huone <= 0:
+            self.huone == 0
+            print("olet ensimmäisessä huoneessa")
+            return
+        else:
+            self.huone -= 1
+            print(Huone.huoneet[self.huone].nimi)
+
+    def keraa_esine(self):
+        # laittasin tähän muuttujan "huone = Huone.huoneet[self.huone] että sais sievennettyä mutta asiat ei päivity sillon jostain syystä ja en osaa korjata"
+        if Huone.huoneet[self.huone].esine not in self.esineet:
+            self.esineet.append(Huone.huoneet[self.huone].esine)
+            self.esineetid.append(Huone.huoneet[self.huone].esine.id)
+            if hasattr(Huone.huoneet[self.huone].esine, "hp"):
+                self.hp += Huone.huoneet[self.huone].esine.hp
+            if hasattr(Huone.huoneet[self.huone].esine, "dmg"):
+                self.dmg += Huone.huoneet[self.huone].esine.dmg
+            print(self.hp, self.dmg)
+            print(hasattr(Huone.huoneet[self.huone].esine, "hp"))
+            print(hasattr(Huone.huoneet[self.huone].esine, "dmg"))
+            print(f"keräsit esineen: {Huone.huoneet[self.huone].esine.nimi}")
+
+    def tallenna(self, path):
+        self.tallennus_data["nimi"] = self.nimi
+        self.tallennus_data["huone"] = self.huone
+        with open(path, "w") as tiedosto:
+            json.dump(self.tallennus_data, tiedosto)
+
+class NPC:
+    def __init__(self, nimi, hp, dmg):
+        self.huone = 4
+        self.nimi = nimi
+        self.hp = hp
+        self.dmg = dmg
+
+    def attack(self):
+        pelaaja = Pelaaja.pelaajat[0]
+        if pelaaja.hp != 0:
+            pelaaja.hp -= self.dmg
+            if pelaaja.hp < 0:
+                pelaaja.hp = 0
