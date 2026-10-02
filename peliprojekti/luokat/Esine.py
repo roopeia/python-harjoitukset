@@ -6,11 +6,10 @@ class Esine:
         Esine.esineet.append(self)
 
 class Avain(Esine):
-    """
-    def __init__(self, id, nimi, lukko):
+    def __init__(self, id, nimi):
         super().__init__(id, nimi)
-        self.lukko = lukko
-    """
+        #self.lukko = lukko
+        
 class Varuste(Esine):
     def __init__(self, id, nimi, hp, dmg):
         super().__init__(id, nimi)

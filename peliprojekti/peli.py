@@ -33,6 +33,7 @@ Huone5 = Bosshuone("huone5", kivi, "viides", avain, vihu)
 
 
 
+
 komento = 0
 Pelaaja1 = 0
 
