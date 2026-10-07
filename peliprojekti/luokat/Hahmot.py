@@ -61,10 +61,11 @@ class Pelaaja:
     
 
     def attack(self):
-        if hasattr(Huone.huoneet[self.huone], "npc"):
-            if Huone.huoneet[self.huone].npc.hp != 0:
-                Huone.huoneet[self.huone].npc.hp -= self.dmg
-                print(f"vihun hp: {Huone.huoneet[self.huone].npc.hp}")
+        huone = Huone.huoneet[self.huone]
+        if hasattr(huone, "npc"):
+            if huone.npc.hp != 0:
+                huone.npc.hp -= self.dmg
+                print(f"vihun hp: {huone.npc.hp}")
                 print(self.hp)
             else: 
                 print("Kuoli jo!")
@@ -82,18 +83,16 @@ class Pelaaja:
             print(Huone.huoneet[self.huone].nimi)
 
     def keraa_esine(self):
+        huone = Huone.huoneet[self.huone]
         # laittasin tähän muuttujan "huone = Huone.huoneet[self.huone] että sais sievennettyä mutta asiat ei päivity sillon jostain syystä ja en osaa korjata"
-        if Huone.huoneet[self.huone].esine not in self.esineet:
-            self.esineet.append(Huone.huoneet[self.huone].esine)
-            self.esineetid.append(Huone.huoneet[self.huone].esine.id)
-            if hasattr(Huone.huoneet[self.huone].esine, "hp"):
-                self.hp += Huone.huoneet[self.huone].esine.hp
-            if hasattr(Huone.huoneet[self.huone].esine, "dmg"):
-                self.dmg += Huone.huoneet[self.huone].esine.dmg
-            print(self.hp, self.dmg)
-            print(hasattr(Huone.huoneet[self.huone].esine, "hp"))
-            print(hasattr(Huone.huoneet[self.huone].esine, "dmg"))
-            print(f"keräsit esineen: {Huone.huoneet[self.huone].esine.nimi}")
+        if huone.esine not in self.esineet:
+            self.esineet.append(huone.esine)
+            self.esineetid.append(huone.esine.id)
+            if hasattr(huone.esine, "hp"):
+                self.hp += huone.esine.hp
+            if hasattr(huone.esine, "dmg"):
+                self.dmg += huone.esine.dmg
+            print(f"keräsit, ja puit esineen: {huone.esine.nimi}")
 
     def tallenna(self, path):
         self.tallennus_data["nimi"] = self.nimi

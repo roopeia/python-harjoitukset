@@ -3,7 +3,7 @@ import os
 
 dir = os.path.dirname(os.path.abspath(__file__))
 path = os.path.join(dir, "save.json")
-
+path2 = os.path.join(dir, "intro.txt")
 class pelaaja:
     def __init__(self, nimi, taso, varusteet):
         self.nimi = nimi
@@ -26,7 +26,9 @@ class pelaaja:
 
 Pelaaja1 = 0
 
-
+with open(path2, "r") as tiedosto:
+    teksti = tiedosto.read()
+    print(teksti)
 
 with open(path, "r") as tiedosto:
     first_char = tiedosto.read(1)

@@ -1,0 +1,7 @@
+DUNGEONMASTER
+
+-Roope Aaltonen
+
+Tässä pelissa on tarkoitus kulkea huoneiston läpi ja kerätä varusteita,
+joita käytetään viimeisen huoneen pahista vastaan.
+

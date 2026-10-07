@@ -7,7 +7,8 @@ import os
 from luokat import Avain, Bosshuone, Lukittu, Varuste
 
 dir = os.path.dirname(os.path.abspath(__file__))
-path = os.path.join(dir, "save.json")
+save = os.path.join(dir, "save.json")
+intro1 = os.path.join(dir, "intro.txt")
 
 """
 ika = int(input("kuinka vanha olet?"))
@@ -31,23 +32,24 @@ Huone3 = Huone("huone3", haarniska, "kolmas")
 Huone4 = Huone("huone4", avain, "neljäs")
 Huone5 = Bosshuone("huone5", kivi, "viides", avain, vihu)
 
-
-
-
 komento = 0
 Pelaaja1 = 0
 
-with open(path, "r") as tiedosto:
+with open(save, "r") as tiedosto:
     first_char = tiedosto.read(1)
     if not first_char:
         nimi = input("nimi: ")
         Pelaaja1 = Hahmot.Pelaaja(nimi, 0, [])
+
+        with open(intro1, "r") as tiedosto:
+            teksti = tiedosto.read()
+            print(teksti)
     else:
-        with open(path, "r") as tiedosto:
+        with open(save, "r") as tiedosto:
             data = json.load(tiedosto)
             Pelaaja1 = Hahmot.Pelaaja(data["nimi"], data["huone"], data["esineetid"])
 
-paavalikko(Pelaaja1, path)
+paavalikko(Pelaaja1, save)
 
 while Pelaaja1.hp != 0:
     print("")
@@ -71,7 +73,7 @@ while Pelaaja1.hp != 0:
     elif komento == 4:
         Pelaaja1.keraa_esine()
     elif komento == 5:
-        paavalikko(Pelaaja1, path)
+        paavalikko(Pelaaja1, save)
 
 
 if Pelaaja1.hp == 0:
