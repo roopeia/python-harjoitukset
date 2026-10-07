@@ -1,1 +1,2 @@
-from .valikko import paavalikko
+from .valikko import paavalikko, profiili
+from .init import init

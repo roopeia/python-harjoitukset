@@ -1,5 +1,5 @@
 from luokat import Hahmot, Huone, Esine
-from funkkarit import paavalikko
+from funkkarit import paavalikko, profiili, init
 
 import json
 import os
@@ -24,42 +24,35 @@ miekka = Varuste(0, "Miekka", 0, 25)
 kilpi = Varuste(1, "Kilpi", 50, 25)
 haarniska = Varuste(2, "Haarniska", 50, 0)
 avain = Avain(3, "Avain")
-kivi = Esine(4, "kivi")
-vihu = Hahmot.NPC("Vihu", 100, 50)
-Huone1 = Huone("huone1", miekka, "eka")
-Huone2 = Huone("huone2", kilpi, "toka")
-Huone3 = Huone("huone3", haarniska, "kolmas")
-Huone4 = Huone("huone4", avain, "neljäs")
-Huone5 = Bosshuone("huone5", kivi, "viides", avain, vihu)
+sinko = Varuste(4, "Sinko", 0, 1000)
+vihu = Hahmot.NPC("Gul'dan", 100, 50)
+Huone1 = Huone("huone1", miekka, "Astuit ensimmäiseen huoneeseen. huoneesta löytyy miekka")
+Huone2 = Huone("huone2", kilpi, "Etenit toiseen huoneeseen. Näet lattialla kilven")
+Huone3 = Huone("huone3", haarniska, "Kuljit saliin jossa on koristeena haarniskoja")
+Huone4 = Huone("huone4", avain, "Etenit neljänteen huoneeseen. huoneen lattialla kimmeltää")
+Huone5 = Bosshuone("huone5", sinko, "Astut suureen saliin jossa näät pahamaineisen velho guldanin", avain, vihu)
 
 komento = 0
-Pelaaja1 = 0
 
-with open(save, "r") as tiedosto:
-    first_char = tiedosto.read(1)
-    if not first_char:
-        nimi = input("nimi: ")
-        Pelaaja1 = Hahmot.Pelaaja(nimi, 0, [])
+with open(intro1, "r") as tiedosto:
+    teksti = tiedosto.read()
+    print(teksti)
 
-        with open(intro1, "r") as tiedosto:
-            teksti = tiedosto.read()
-            print(teksti)
-    else:
-        with open(save, "r") as tiedosto:
-            data = json.load(tiedosto)
-            Pelaaja1 = Hahmot.Pelaaja(data["nimi"], data["huone"], data["esineetid"])
+Pelaaja1 = init(save)
 
 paavalikko(Pelaaja1, save)
 
 while Pelaaja1.hp != 0:
     print("")
+    if sinko in Pelaaja1.esineet:
+        print("(0)Laukaise Armor-Piercing infantry light arm system(APILAS)")
     print("(1)lyö")
     print("(2)Liiku seuraavaan huoneeseen")
     print("(3)Liiku edelliseen huoneeseen")
     print("(4)kerää huoneesta esine")
     print("(5)valikko")
     komento = int(input(">"))
-    if komento == 1:
+    if komento == 1 or komento == 0:
         Pelaaja1.attack()
         if Pelaaja1.huone == vihu.huone:
             vihu.attack()

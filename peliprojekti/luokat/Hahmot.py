@@ -33,7 +33,6 @@ class Pelaaja:
 
         if self.huone >= len(Huone.huoneet) - 1:
             print("Et voi mennä eteenpäin.")
-            print(Huone.huoneet[self.huone].nimi)
             return
 
         seuraava = Huone.huoneet[self.huone + 1]
@@ -42,22 +41,21 @@ class Pelaaja:
             if seuraava.vaatimus in self.esineet:
                 self.huone += 1
                 print("ovi aukaistu")
-                print(Huone.huoneet[self.huone].nimi)
-                print(seuraava.vaatimus.nimi)
-                print(seuraava.npc.nimi)
+                print(Huone.huoneet[self.huone].desc)
+                print(f"{seuraava.npc.nimi}, hp: {seuraava.npc.hp}")
             else:
                 print("ovi lukossa")
         elif isinstance(seuraava, Lukittu):
             if seuraava.vaatimus in self.esineet:
                 self.huone += 1
                 print("ovi aukaistu")
-                print(Huone.huoneet[self.huone].nimi)
+                print(Huone.huoneet[self.huone].desc)
             else:
                 print("ovi lukossa")
         else:
             self.huone += 1
-            print(Huone.huoneet[self.huone].nimi)
-        print(self.huone)
+            print(Huone.huoneet[self.huone].desc)
+        
     
 
     def attack(self):
@@ -65,8 +63,10 @@ class Pelaaja:
         if hasattr(huone, "npc"):
             if huone.npc.hp != 0:
                 huone.npc.hp -= self.dmg
-                print(f"vihun hp: {huone.npc.hp}")
-                print(self.hp)
+                if huone.npc.hp < 0:
+                    huone.npc.hp = 0
+                print(f"Vihollisen hp: {huone.npc.hp}")
+                print(f"oma hp: {self.hp}")
             else: 
                 print("Kuoli jo!")
         
@@ -84,7 +84,7 @@ class Pelaaja:
 
     def keraa_esine(self):
         huone = Huone.huoneet[self.huone]
-        # laittasin tähän muuttujan "huone = Huone.huoneet[self.huone] että sais sievennettyä mutta asiat ei päivity sillon jostain syystä ja en osaa korjata"
+        
         if huone.esine not in self.esineet:
             self.esineet.append(huone.esine)
             self.esineetid.append(huone.esine.id)
@@ -92,7 +92,7 @@ class Pelaaja:
                 self.hp += huone.esine.hp
             if hasattr(huone.esine, "dmg"):
                 self.dmg += huone.esine.dmg
-            print(f"keräsit, ja puit esineen: {huone.esine.nimi}")
+            print(f"keräsit esineen: {huone.esine.nimi}")
 
     def tallenna(self, path):
         self.tallennus_data["nimi"] = self.nimi
@@ -109,7 +109,7 @@ class NPC:
 
     def attack(self):
         pelaaja = Pelaaja.pelaajat[0]
-        if pelaaja.hp != 0:
+        if pelaaja.hp != 0 and self.hp != 0:
             pelaaja.hp -= self.dmg
             if pelaaja.hp < 0:
                 pelaaja.hp = 0
