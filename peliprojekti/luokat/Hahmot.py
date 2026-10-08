@@ -94,6 +94,7 @@ class Pelaaja:
                 self.dmg += huone.esine.dmg
             print(f"keräsit esineen: {huone.esine.nimi}")
 
+
     def tallenna(self, path):
         self.tallennus_data["nimi"] = self.nimi
         self.tallennus_data["huone"] = self.huone

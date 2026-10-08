@@ -6,6 +6,7 @@ class Huone:
         self.desc = desc
         Huone.huoneet.append(self)
 
+
 class Lukittu(Huone):
     def __init__(self, nimi, esine, desc, vaatimus):
         super().__init__(nimi, esine, desc)

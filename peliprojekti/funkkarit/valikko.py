@@ -13,36 +13,36 @@ def profiili(pelaaja, path):
         print(esine.nimi)
     print("(1)Muokkaa profiilia")
     print("(2)Takaisin")
-    komento = int(input(">"))
-    if komento == 1:
+    komento = input(">")
+    if komento == "1":
         uusinimi = input("Uusi nimi: ")
         pelaaja.nimi = uusinimi
         pelaaja.tallenna(path)
-    elif komento == 2:
+    elif komento == "2":
         return
 
 
 def paavalikko(pelaaja, path):
     pelaaja = pelaaja
     path = path
-    komento = 0
-    while komento != 1:
+    komento = ""
+    while komento != "1":
         print("")
         print("(1)pelaa")
         print("(2)tallenna tiedostoon")
         print("(3)tyhjennä tallennus")
         print("(4)profiili")
         print("(5)lopeta")
-        komento = int(input(">"))
-        if komento == 2:
+        komento = input(">")
+        if komento == "2":
             pelaaja.tallenna(path)
-        elif komento == 3:
+        elif komento == "3":
             open(path, 'w').close()
             if input("tee uusi profiili y/n") == "y":
                 init(path)
-        elif komento == 4:
+        elif komento == "4":
             profiili(pelaaja, path)
-        elif komento == 5:
+        elif komento == "5":
             quit()
     return
 
