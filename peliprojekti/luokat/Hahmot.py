@@ -15,13 +15,13 @@ class Pelaaja:
         self.esineetid = esineetid
         for id in esineetid:
             self.esineet.append(Esine.esineet[id])
-        """
+        #jos sinulla on tallennus niin tämä lisää esineitten hp ja dmg takaisin omiisi.
         for esine in self.esineet:
             if hasattr(esine, "hp"):
                 self.hp += esine.hp
-            elif hasattr(esine, "dmg"):
+            if hasattr(esine, "dmg"):
                 self.dmg += esine.dmg
-        """
+        
         self.tallennus_data = {
             "nimi": self.nimi,
             "huone": self.huone,
@@ -30,7 +30,7 @@ class Pelaaja:
         Pelaaja.pelaajat.append(self)
 
     def liiku_eteen(self):
-
+        
         if self.huone >= len(Huone.huoneet) - 1:
             print("Et voi mennä eteenpäin.")
             return

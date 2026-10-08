@@ -8,7 +8,7 @@ class Esine:
 class Avain(Esine):
     def __init__(self, id, nimi):
         super().__init__(id, nimi)
-        #self.lukko = lukko
+        #Ajattelin laittaa avaimelle extra muuttujia sen takia tein siitä oman luokan
         
 class Varuste(Esine):
     def __init__(self, id, nimi, hp, dmg):

@@ -12,6 +12,7 @@ intro1 = os.path.join(dir, "intro.txt")
 
 
 with open(save, "r") as tiedosto:
+        #katsoo oletko jo pelannut/tehnyt ikä kyselyn katsomalla onko save/profiili tehty
         first_char = tiedosto.read(1)
         if not first_char:
             print("kuinka vanha olet")
@@ -37,6 +38,7 @@ Huone5 = Bosshuone("huone5", sinko, "Astut suureen saliin jossa näät pahamaine
 
 komento = 0
 
+
 with open(intro1, "r") as tiedosto:
     teksti = tiedosto.read()
     print(teksti)
@@ -45,6 +47,7 @@ Pelaaja1 = init(save)
 
 paavalikko(Pelaaja1, save)
 
+#pää looppi
 while Pelaaja1.hp != 0:
     print("")
     if sinko in Pelaaja1.esineet:
